@@ -26,12 +26,15 @@ const selectForInviteAnswer =
     // TODO: this is bad, might run into GitHub rate limit, also permission should be hoisted up as a parameter
     return await Promise.all(
       collaborators.map((c) => {
-        return githubClient.put(
-          `/repos/${repo.owner}/${repo.name}/collaborators/${c.login}`,
-          {
+        return githubClient
+          .put(`/repos/${repo.owner}/${repo.name}/collaborators/${c.login}`, {
             permission: "pull",
-          }
-        );
+          })
+          .catch((error) => {
+            // print it and ignore it
+            console.error(error);
+            return [];
+          });
       })
     );
   };

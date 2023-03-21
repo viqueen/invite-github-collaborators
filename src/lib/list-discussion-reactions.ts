@@ -28,5 +28,10 @@ export const listDiscussionReactions = async ({ name, owner }: Repo) => {
     .then(({ data: output }) => {
       // TODO: this is bad, but building for happy path only
       return output.data.repository.discussions.nodes[0].reactions.nodes;
+    })
+    .catch((error) => {
+      // print it and ignore it
+      console.error(error);
+      return [];
     });
 };

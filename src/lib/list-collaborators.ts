@@ -8,5 +8,10 @@ export const listCollaborators = async ({ owner, name }: Repo) => {
     .then((response) => response.data)
     .then((list) =>
       list.map(({ login, role_name }: any) => ({ login, role_name }))
-    );
+    )
+    .catch((error) => {
+      // print it and ignore it
+      console.error(error);
+      return [];
+    });
 };

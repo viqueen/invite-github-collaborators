@@ -11,5 +11,10 @@ export const listInvitations = async ({ owner, name }: Repo) => {
         login: invitee.login,
         permissions,
       }))
-    );
+    )
+    .catch((error) => {
+      // print it and ignore it
+      console.error(error);
+      return [];
+    });
 };
