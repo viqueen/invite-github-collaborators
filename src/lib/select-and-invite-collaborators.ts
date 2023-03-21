@@ -1,15 +1,6 @@
 import { prompt } from "inquirer";
 import { githubClient } from "./github-client";
-
-type Collaborator = {
-  name: string;
-  login: string;
-};
-
-type Repo = {
-  name: string;
-  owner: string;
-};
+import { Collaborator, Repo } from "./types";
 
 const selectForInviteQuestion = async (collaborators: Collaborator[]) => {
   if (collaborators.length === 0) return undefined;

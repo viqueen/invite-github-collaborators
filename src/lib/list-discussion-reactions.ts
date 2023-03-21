@@ -1,17 +1,10 @@
 import { githubClient } from "./github-client";
+import { Repo } from "./types";
 
-type ListDiscussionReactionsProps = {
-  repoOwner: string;
-  repoName: string;
-};
-
-export const listDiscussionReactions = async ({
-  repoOwner,
-  repoName,
-}: ListDiscussionReactionsProps) => {
+export const listDiscussionReactions = async ({ name, owner }: Repo) => {
   const query = `
         query {
-            repository(owner: "${repoOwner}", name: "${repoName}") {
+            repository(owner: "${owner}", name: "${name}") {
                 discussions(first: 1) {
                     nodes {
                         reactions(first: 50, content: EYES) {
