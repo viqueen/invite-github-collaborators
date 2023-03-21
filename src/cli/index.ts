@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { listDiscussionReactions } from "../lib/list-discussion-reactions";
 import { selectAndInviteCollaborators } from "../lib/select-and-invite-collaborators";
 import { listCollaborators } from "../lib/list-collaborators";
+import { listInvitations } from "../lib/list-invitations";
 
 const program = new Command();
 
@@ -28,6 +29,16 @@ program
   .action(async (opts) => {
     const { owner, name } = opts;
     const output = await listCollaborators({ name, owner });
+    console.table(output);
+  });
+
+program
+  .command("list-invitations")
+  .option("-o, --owner", "with repo owner", "labset")
+  .option("-n, --name", "with repo name", "jdk")
+  .action(async (opts) => {
+    const { owner, name } = opts;
+    const output = await listInvitations({ name, owner });
     console.table(output);
   });
 
