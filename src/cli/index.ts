@@ -3,6 +3,8 @@ import { listDiscussionReactions } from "../lib/list-discussion-reactions";
 import { selectAndInviteCollaborators } from "../lib/select-and-invite-collaborators";
 import { listCollaborators } from "../lib/list-collaborators";
 import { listInvitations } from "../lib/list-invitations";
+import keyBy from "lodash/keyBy";
+import { Collaborator } from "../lib/types";
 
 const program = new Command();
 
@@ -18,7 +20,11 @@ program
       name,
       owner,
     });
-    const collaborators = output.map((i: any) => i.user);
+    const collaborators = output.map((i: any) => i.user) as Collaborator[];
+    const byLogin = keyBy(collaborators, (c) => c.login);
+
+    console.info(byLogin);
+
     await selectAndInviteCollaborators({ name, owner }, collaborators);
   });
 
