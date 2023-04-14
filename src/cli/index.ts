@@ -5,8 +5,21 @@ import { listCollaborators } from "../lib/list-collaborators";
 import { listInvitations } from "../lib/list-invitations";
 import keyBy from "lodash/keyBy";
 import { Collaborator } from "../lib/types";
+import { listCurrentDiscussion } from "../lib/list-current-discussion";
 
 const program = new Command();
+
+program
+  .command("current-discussion")
+  .option("-o, --owner", "with repo owner", "labset")
+  .option("-n, --name", "with repo name", "jdk")
+  .action(async (opts) => {
+    const { owner, name } = opts;
+    await listCurrentDiscussion({
+      name,
+      owner,
+    });
+  });
 
 // TODO: this is bad, should not have hard-coded values,
 //  pull them out of env vars, but this is fine for now

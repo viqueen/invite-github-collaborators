@@ -1,21 +1,13 @@
 import { githubClient } from "./github-client";
 import { Repo } from "./types";
 
-export const listDiscussionReactions = async ({ name, owner }: Repo) => {
+export const listCurrentDiscussion = async ({ name, owner }: Repo) => {
   const query = `
         query {
             repository(owner: "${owner}", name: "${name}") {
                 discussions(first: 1) {
                     nodes {
                         title
-                        reactions(first: 50, content: EYES) {
-                            nodes {
-                                user {
-                                    name
-                                    login
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -28,11 +20,7 @@ export const listDiscussionReactions = async ({ name, owner }: Repo) => {
     })
     .then(({ data: output }) => {
       // TODO: this is bad, but building for happy path only
-      console.info(
-        "Discussion: ",
-        output.data.repository.discussions.nodes[0].title
-      );
-      return output.data.repository.discussions.nodes[0].reactions.nodes;
+      console.info(output.data.repository.discussions);
     })
     .catch((error) => {
       // print it and ignore it
