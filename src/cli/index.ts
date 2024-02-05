@@ -26,7 +26,7 @@ program
 program
   .command("invite-them")
   .option("-o, --owner", "with repo owner", "labset")
-  .option("-n, --name", "with repo name", "jdk")
+  .option("-n, --name", "with repo name", "compiler-workshop")
   .action(async (opts) => {
     const { owner, name } = opts;
     const output = await listDiscussionReactions({
@@ -44,7 +44,7 @@ program
 program
   .command("list-them")
   .option("-o, --owner", "with repo owner", "labset")
-  .option("-n, --name", "with repo name", "jdk")
+  .option("-n, --name", "with repo name", "compiler-workshop")
   .action(async (opts) => {
     const { owner, name } = opts;
     const output = await listCollaborators({ name, owner });
@@ -54,7 +54,7 @@ program
 program
   .command("list-invitations")
   .option("-o, --owner", "with repo owner", "labset")
-  .option("-n, --name", "with repo name", "jdk")
+  .option("-n, --name", "with repo name", "compiler-workshop")
   .action(async (opts) => {
     const { owner, name } = opts;
     const output = await listInvitations({ name, owner });
